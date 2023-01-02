@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: gameroom_backend_production
   username: gameroom_backend
   password: <%= ENV["GAMEROOM_BACKEND_DATABASE_PASSWORD"] %>
