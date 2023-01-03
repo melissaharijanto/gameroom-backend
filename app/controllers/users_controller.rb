@@ -1,16 +1,18 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  before_action :authorize_request, except: :create
+  before_action :find_user, except: %i[create index]
+  # before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users
   def index
     @users = User.all
 
-    render json: @users
+    render json: @users, status: :ok
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, status: :ok
   end
 
   # POST /users
@@ -39,10 +41,16 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+    def find_user
+      @user = User.find_by_username!(params[:_username])
+      rescue ActiveRecord::RecordNotFound
+        render json: { errors: 'User not found' }, status: :not_found
     end
+
+    # # Use callbacks to share common setup or constraints between actions.
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
 
     # Only allow a list of trusted parameters through.
     def user_params
