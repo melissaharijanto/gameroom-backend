@@ -46,6 +46,6 @@ class GameCommunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_community_params
-      params.require(:game_community).permit(:title, :image_url, :followers)
+      params.require(:game_community).permit(:title, :image_url)
     end
 end

@@ -33,7 +33,7 @@ class UsersController < ApplicationController
           render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
                           username: @user.username }, status: :ok
         else
-          render json: { error: 'unauthorized' }, status: :unauthorized
+          render json: @user.errors.full_messages, status: :unauthorized
         end
   end
 
