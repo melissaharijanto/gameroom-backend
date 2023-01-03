@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   post '/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
-
+  post '/signup', to: 'users#create'
 end
