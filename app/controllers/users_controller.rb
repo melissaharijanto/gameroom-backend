@@ -31,7 +31,7 @@ class UsersController < ApplicationController
           token = JsonWebToken.encode(user_id: @user.id)
           time = Time.now + 1.week.to_i
           render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
-                          username: @user.username }, status: :ok
+                          user: @user }, status: :ok
         else
           render json: @user.errors.full_messages, status: :unauthorized
         end
