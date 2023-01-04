@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "https://gameroom.onrender.com"
+    origins "http://localhost:3000", "https://gameroom.onrender.com", "https://gameroom-forum.netlify.app"
 
     resource "*",
       headers: :any,
