@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   post '/login', to: 'authentication#login'
   post '/signup', to: 'users#create'
   get '/current_user', to: 'authentication#current_user'
-  get '/user_following', to: 'followings#user_following'
+  get '/follow', to: 'game_communities#get_user_following'
+  post '/follow', to: 'game_communities#follow'
 end

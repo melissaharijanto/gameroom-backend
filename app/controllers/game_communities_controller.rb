@@ -1,4 +1,5 @@
 class GameCommunitiesController < ApplicationController
+  before_action :authorize_request, only: [:follow, :get_user_following]
   before_action :set_game_community, only: %i[ show update destroy ]
 
   # GET /game_communities
@@ -36,6 +37,30 @@ class GameCommunitiesController < ApplicationController
   # DELETE /game_communities/1
   def destroy
     @game_community.destroy
+  end
+
+  def follow 
+    @community = GameCommunity.find_by_id(params[:id])
+    @followers_list = @community.followers
+    if @community.followers.include?(@current_user.id)
+      @followers_list.delete(@current_user.id)
+      @community.update_attribute(:followers, @followers_list)
+      @community.save
+    else
+      @followers_list << @current_user.id
+      @community.update_attribute(:followers, @followers_list)
+      @community.save
+    end
+    render json: @community.followers, status: :ok
+  end
+
+  def get_user_following
+    @user_followings = []
+    @communities = GameCommunity.all
+    @communities.each do |community|
+      @user_followings << community if community.followers.include?(@current_user.id)
+    end
+    render json: @user_followings
   end
 
   private
