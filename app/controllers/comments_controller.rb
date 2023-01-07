@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authorize_request
   before_action :set_comment, only: %i[ show update destroy ]
 
   # GET /comments

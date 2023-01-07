@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action: :authorize_request
+  before_action :authorize_request
   before_action :set_post, only: %i[ show update destroy ]
 
   # GET /posts

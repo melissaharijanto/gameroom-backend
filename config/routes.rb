@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/comments', to: 'comments#get_comments_by_post_id'
   post '/post_likes', to: 'posts#set_likes'
   post '/comment_likes', to: 'comments#set_likes'
+  
 end
