@@ -19,6 +19,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
+      @community = GameCommunity.find_by_id(@post.game_community_id)
+      @posts_array = @community.posts << @post.id
+      @community.update_attribute(:posts, @posts_array)
       render json: @post, status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -36,7 +39,13 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    @post.destroy
+    @community = GameCommunity.find_by_id(@post.game_community_id)
+    @posts_array = @community.posts
+    if @posts_array.include?(@post.id)
+      @posts_array.delete(@post.id)
+      @community.update_attribute(:posts, @posts_array)
+      @post.destroy
+    end
   end
 
   def get_posts_by_community_id
