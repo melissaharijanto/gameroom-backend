@@ -63,6 +63,13 @@ class GameCommunitiesController < ApplicationController
     render json: @user_followings
   end
 
+  def search
+    @title = params[:title]
+    # SQL Query for case insensitive searches taken from https://stackoverflow.com/questions/30705898/rails-find-records-containing-specific-word
+    @results = GameCommunity.where("lower(title) LIKE lower(?)", "%#{@title.downcase}%").take
+    render json: @results
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game_community

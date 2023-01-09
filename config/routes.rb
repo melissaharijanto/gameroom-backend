@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/current_user', to: 'authentication#current_user'
   get '/follow', to: 'game_communities#get_user_following'
   post '/follow', to: 'game_communities#follow'
+  post '/search', to: 'game_communities#search'
   post '/community_posts', to: 'posts#get_posts_by_community_id'
   post '/post_likes', to: 'posts#set_likes'
   post '/comments', to: 'comments#get_comments_by_post_id'
