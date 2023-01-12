@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       @post = Post.find_by_id(@comment.post_id)
-      @post_comments = @post.comments << @post.id
+      @post_comments = @post.comments << @comment.id
       @post.update_attribute(:comments, @posts_comments)
       render json: @comment, status: :created, location: @comment
     else
