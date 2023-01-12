@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   end
 
   def get_posts_by_community_id
-    @posts = Post.find_by(game_community_id: params[:game_community_id])
+    @posts = Post.where(game_community_id: params[:game_community_id])
     render json: @posts, status: :ok
   end
 
