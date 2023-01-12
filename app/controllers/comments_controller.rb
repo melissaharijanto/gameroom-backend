@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     if @comment.save
       @post = Post.find_by_id(@comment.post_id)
       @post_comments = @post.comments << @comment.id
-      @post.update_attribute(:comments, @posts_comments)
+      @post.update_attribute(:comments, @post_comments)
       render json: @comment, status: :created, location: @comment
     else
       render json: @post.errors, status: :unprocessable_entity
