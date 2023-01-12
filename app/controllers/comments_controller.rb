@@ -27,7 +27,6 @@ class CommentsController < ApplicationController
       render json: @post.errors, status: :unprocessable_entity
     end
   end
-  end
 
   # PATCH/PUT /comments/1
   def update
