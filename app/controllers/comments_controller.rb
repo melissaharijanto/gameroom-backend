@@ -39,7 +39,13 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
-    @comment.destroy
+    @post = Post.find_by_id(@comment.post_id)
+    @comments_array = @post.comments
+    if @comments_array.include?(@comment.id)
+      @comments_array.delete(@comment.id)
+      @post.update_attribute(:comments, @comments_array)
+      @comment.destroy
+    end
   end
 
   def get_comments_by_post_id
