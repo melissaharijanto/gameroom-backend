@@ -54,10 +54,10 @@ class CommentsController < ApplicationController
   end
 
   def set_likes
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by_id(params[:id])
     @likes_array = @comment.likes
 
-    if @likes_array.includes?(@current_user.id)
+    if @likes_array.include?(@current_user.id)
       @likes_array.delete(@current_user.id)
       @comment.update_attribute(:likes, @likes_array)
       @comment.save

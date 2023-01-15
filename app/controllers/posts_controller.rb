@@ -54,10 +54,10 @@ class PostsController < ApplicationController
   end
 
   def set_likes
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
     @likes_array = @post.likes
 
-    if @likes_array.includes?(@current_user.id)
+    if @likes_array.include?(@current_user.id)
       @likes_array.delete(@current_user.id)
       @post.update_attribute(:likes, @likes_array)
       @post.save
