@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
   end
 
   def get_comments_by_post_id
-    @comments = Comments.where(post_id: params[:post_id])
+    @comments = Comments.where(post_id: params[:post_id]).reverse_order
     render json: @comments, status: :ok
   end
 
