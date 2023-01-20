@@ -66,7 +66,7 @@ class GameCommunitiesController < ApplicationController
   def search
     @title = params[:title]
     # SQL Query for case insensitive searches taken from https://stackoverflow.com/questions/30705898/rails-find-records-containing-specific-word
-    @results = GameCommunity.where("lower(title) LIKE lower(?)", "%#{@title.downcase}%")
+    @results = GameCommunity.where("lower(title) ILIKE ?)", "%#{@title.downcase}%")
     render json: @results
   end
 
