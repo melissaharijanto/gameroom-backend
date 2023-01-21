@@ -48,11 +48,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  # POST /comments
   def get_comments_by_post_id
     @comments = Comments.where(post_id: params[:post_id]).reverse_order
     render json: @comments, status: :ok
   end
 
+  # POST /comment_likes
   def set_likes
     @comment = Comment.find_by_id(params[:id])
     @likes_array = @comment.likes

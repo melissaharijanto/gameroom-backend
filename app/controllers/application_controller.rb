@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
         render json: { error: 'not_found' }
     end
     
+    # JWT authentication taken from https://medium.com/binar-academy/rails-api-jwt-authentication-a04503ea3248
     def authorize_request
         header = request.headers['Authorization']
         header = header.split(' ').last if header

@@ -39,6 +39,7 @@ class GameCommunitiesController < ApplicationController
     @game_community.destroy
   end
 
+  # POST /follow
   def follow 
     @community = GameCommunity.find_by_id(params[:id])
     @followers_list = @community.followers
@@ -54,6 +55,7 @@ class GameCommunitiesController < ApplicationController
     render json: @community.followers, status: :ok
   end
 
+  # GET /follow
   def get_user_following
     @user_followings = []
     @communities = GameCommunity.all
@@ -63,6 +65,7 @@ class GameCommunitiesController < ApplicationController
     render json: @user_followings
   end
 
+  # POST /search
   def search
     @title = params[:title]
     # SQL Query for case insensitive searches taken from https://stackoverflow.com/questions/30705898/rails-find-records-containing-specific-word

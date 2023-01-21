@@ -48,11 +48,13 @@ class PostsController < ApplicationController
     end
   end
 
+  # POST /community_posts
   def get_posts_by_community_id
     @posts = Post.where(game_community_id: params[:game_community_id]).reverse_order
     render json: @posts, status: :ok
   end
 
+  # POST /post_likes
   def set_likes
     @post = Post.find_by_id(params[:id])
     @likes_array = @post.likes
